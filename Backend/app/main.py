@@ -29,18 +29,18 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="StudyFlow API")
 
-# Allow the deployed frontend and local development frontend
+# CORS configuration for deployed and local frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://study-flow-ma4ee58l2-renu25.vercel.app",
+        "https://study-flow-1w9z9getq-renu25.vercel.app",
         "http://localhost:3000",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(subjects_router)
 app.include_router(sessions_router)
