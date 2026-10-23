@@ -1,8 +1,21 @@
+
 @import "tailwindcss";
 
+/* Use StudyFlow's own dark-mode toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff9fc;
+  --foreground: #1e293b;
+  --card-background: #ffffff;
+  --border-color: #fbcfe8;
+}
+
+:root.dark {
+  --background: #020617;
+  --foreground: #f1f5f9;
+  --card-background: #0f172a;
+  --border-color: #334155;
 }
 
 @theme inline {
@@ -12,15 +25,79 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
+  background: var(--background);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Global dark-mode styling */
+html.dark body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Convert common light card and page backgrounds */
+html.dark [class~="bg-white"],
+html.dark [class~="bg-[#fff9fc]"],
+html.dark [class~="bg-gray-50"],
+html.dark [class~="bg-slate-50"],
+html.dark [class~="bg-pink-50"],
+html.dark [class~="bg-rose-50"],
+html.dark [class~="bg-purple-50"],
+html.dark [class~="bg-violet-50"],
+html.dark [class~="bg-indigo-50"] {
+  background-color: #0f172a !important;
+}
+
+/* Keep text readable in dark mode */
+html.dark [class~="text-slate-900"],
+html.dark [class~="text-slate-800"],
+html.dark [class~="text-slate-700"],
+html.dark [class~="text-slate-600"],
+html.dark [class~="text-gray-900"],
+html.dark [class~="text-gray-800"],
+html.dark [class~="text-gray-700"],
+html.dark [class~="text-gray-600"],
+html.dark [class~="text-pink-900"],
+html.dark [class~="text-purple-900"] {
+  color: #e2e8f0 !important;
+}
+
+/* Update common borders */
+html.dark [class~="border-pink-100"],
+html.dark [class~="border-pink-200"],
+html.dark [class~="border-rose-100"],
+html.dark [class~="border-purple-100"],
+html.dark [class~="border-slate-100"],
+html.dark [class~="border-gray-100"],
+html.dark [class~="border-gray-200"] {
+  border-color: #334155 !important;
+}
+
+/* Inputs and form controls */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border-color: #475569;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #94a3b8;
 }
